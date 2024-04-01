@@ -12,6 +12,30 @@ const rl = readline.createInterface({
 
 
 const pigLatin = (word) => {
+  let result = word.toLowerCase();
+let theString = result.trim(); //this takes text, trim/lowercases it
+const vowelFind = /[aeiou]/i; //finds first vowel, returns index
+const firstVowelIndex = theString.search(vowelFind);
+
+  if (firstVowelIndex === 0) { 
+    result = theString + "yay"
+    
+  } else if (firstVowelIndex === 1) {
+
+
+// remove character at 0
+result = theString.slice(1) + theString.charAt(0) + "ay"
+
+}
+
+else {
+
+
+// remove characters at 0 and 1
+result = theString.slice(2) + theString.charAt(0) + theString.charAt(1) + "ay"
+
+}
+return result
 
   // Your code here
 
