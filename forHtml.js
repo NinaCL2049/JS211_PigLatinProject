@@ -1,68 +1,40 @@
 'use strict';
 
-// brings in the assert module for unit testing
-const assert = require('assert');
-// brings in the readline module to access the command line
-const readline = require('readline');
-// use the readline module to print out to the command line
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout
-});
 
-// const runPigLatinOn = () => {
-//   let userWord = document.getElementById("userInput").value;
-//   let pigLatinResult = pigLatin(userWord);
-//   document.getElementById("answer").innerHTML = pigLatinResult;
 
-// }
+
+
 
 const pigLatin = (word) => {
   let result = word.toLowerCase();
-let theString = result.trim(); //this takes text, trim/lowercases it
-const vowelFind = /[aeiou]/i; //finds first vowel, returns index
-const firstVowelIndex = theString.search(vowelFind);
+  let theString = result.trim();
+  const vowelFind = /[aeiou]/i;
+  const firstVowelIndex = theString.search(vowelFind);
 
-  if (firstVowelIndex === 0) { 
+  if (firstVowelIndex === 0) {
     result = theString + "yay"
-    
+
   } else if (firstVowelIndex === 1) {
+    result = theString.slice(1) + theString.charAt(0) + "ay"
+
+  }
+
+  else {
+    result = theString.slice(2) + theString.charAt(0) + theString.charAt(1) + "ay"
+  }
+
+  return result;
 
 
-// remove character at 0
-result = theString.slice(1) + theString.charAt(0) + "ay"
-
-}
-
-else {
-
-
-// remove characters at 0 and 1
-result = theString.slice(2) + theString.charAt(0) + theString.charAt(1) + "ay"
-
-}
-// return result
-// console.log(pigLatin(result))
-return result;
 
   // Your code here
 
 }
 
-
-// lines 6- whatever incompatible with code needed for gui 
-
-// const runPigLatinOn = () => {
-//     let userWord = document.getElementById("userInput").value;
-//     let pigLatinResult = pigLatin(userWord);
-//     document.getElementById("answer").innerHTML = pigLatinResult;
-  
-//   }
-
-
 // the first function called in the program to get an input from the user
 // to run the function use the command: node main.js
 // to close it ctrl + C
+
 const getPrompt = () => {
   rl.question('word ', (answer) => {
     console.log( pigLatin(answer) );
@@ -70,6 +42,12 @@ const getPrompt = () => {
   });
 }
 
+const runPigLatinOn = () => {
+  let userWord = document.getElementById("userInput").value;
+  let pigLatinResult = pigLatin(userWord);
+  document.getElementById("answer").innerHTML = pigLatinResult;
+
+}
 // Unit Tests
 // to use them run the command: npm test main.js
 // to close them ctrl + C
@@ -98,6 +76,7 @@ if (typeof describe === 'function') {
   getPrompt();
 
 }
+
 
 
 
