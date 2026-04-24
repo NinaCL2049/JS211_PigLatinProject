@@ -1,23 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="forHtml.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <title>Native Plant Chat</title>
+  <link rel="stylesheet" href="styles.css">
+
+
+</head>
+
+<body>
+
+    <h1>Native Plant Chat</h1>
+
+  <!-- INPUT AREA FIRST -->
+  <div class="inputArea">
+
+    <textarea
+      id="userInput"
+      placeholder="your question"
+    ></textarea>
+
+    <button id="translateBtn">Ask</button>
+
+  </div>
+
+  <!-- RESPONSES BELOW -->
+  <div id="chatArea"></div>
+
+  <script>
+
+    function pigLatin(text) {
     
-    <h1>Pig Latin</h1>
+      let words = text.split(" ");
+
+      let translated = words.map(word => {
+        return word.slice(1) + word[0] + "ay";
+      });
+
+      return translated.join(" ");
+    }
+
+
+    function runPigLatin() {
+
+  const inputBox = document.getElementById("userInput");
+  const chatArea = document.getElementById("chatArea");
+
+  const userText = inputBox.value.trim();
+
+  if (userText === "") return;
+
+  const translatedText = pigLatin(userText);
+
+  // USER MESSAGE
+  const userMessage = document.createElement("div");
+  userMessage.classList.add("message", "userMessage");
+  userMessage.textContent = userText;
+
+  // BOT MESSAGE
+  const botMessage = document.createElement("div");
+  botMessage.classList.add("message", "botMessage");
+  botMessage.textContent = translatedText;
+
+  // Add both
+  chatArea.appendChild(userMessage);
+  chatArea.appendChild(botMessage);
+
+  // Clear input
+  inputBox.value = "";
+
+  // Scroll down
+  chatArea.scrollTop = chatArea.scrollHeight;
+}
+
+
     
-    <div id="displayElement"></div>
-    <form>
-      <input id="userInput" type="text" placeholder="Enter Text">
-      <!-- How do you get this input sent to the pigLatin() function? -->
-      <button type="button" onclick="runPigLatinOn()">Translate</button>
-      <div id="answer"></div>
-    </form>  
+    document
+      .getElementById("translateBtn")
+      .addEventListener("click", runPigLatin);
+
+
     
-    
-  </body>
+    document
+      .getElementById("userInput")
+      .addEventListener("keydown", function(event) {
+
+        
+        if (event.key === "Enter" && !event.shiftKey) {
+          event.preventDefault();
+          runPigLatin();
+        }
+
+      });
+
+  </script>
+
+</body>
 </html>
